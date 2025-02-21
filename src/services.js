@@ -11,6 +11,9 @@ const filmForm = document.getElementById("film-form");
 // guarda el id de la película que se está editanto para saber si se está editando
 let editingFilmId = null; // Guardará el ID de la película que se edita
 
+
+
+
 // 1️⃣ CREATE: Método POST
 function createFilm() {
     editingFilmId = null; // Si estamos creando, no hay ID asociado
@@ -116,7 +119,11 @@ async function eliminarPelicula(id) {
     const confirmar = confirm(`¿Seguro que quieres eliminar la película con ID: ${id}?`);
     if (confirmar) {
         try {
-            await fetch(`http://localhost:3000/films/${id}`, { method: "DELETE" });
+            await fetch(`http://localhost:3000/films/${id}`,
+            { 
+                method: "DELETE" 
+            }
+        );
             printAllFilms(); // Recargar la tabla
         } catch (error) {
             console.error("Error al eliminar la película:", error);
@@ -127,7 +134,7 @@ async function eliminarPelicula(id) {
 // 🖨️ PRINT: Mostrar todas las películas en la tabla
 async function printAllFilms() {
     const films = await getAllFilms();
-    table.innerHTML = tableHead; // Resetea tabla pero mantiene los encabezados
+    table.innerHTML = tableHead; 
 
     films.forEach((film) => {
         table.insertAdjacentHTML(
